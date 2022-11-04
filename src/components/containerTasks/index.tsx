@@ -2,6 +2,7 @@ import * as S from "./styles";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import {TaskTypes} from "../../types/task";
+import { log } from "console";
 interface PropsTasks {
   tasks: string;
 }
@@ -9,14 +10,15 @@ interface PropsTasks {
 const ContainerTasks: React.FC<PropsTasks> = ({ tasks }) => {
   const id = uuidv4();
   const [search, getSearch] = useState("");
-  const [tasksList, setTasksList] = useState<TaskTypes[] | null>([]);
+  const [showTasks, setShowTasks] = useState(false);
+  const [tasksList, setTasksList] = useState<TaskTypes[] >([]);
 
-  useEffect(() => {
-    const tasksStorage = localStorage.getItem("tasks");
-    if (tasksStorage) {
-      setTasksList(JSON.parse(tasksStorage));
-    }
-  }, []);
+  // useEffect(() => {
+  //   const tasksStorage = localStorage.getItem("tasks");
+  //   if (tasksStorage) {
+  //     setTasksList(JSON.parse(tasksStorage));
+  //   }
+  // }, []);
 
   const AddNewTask = () => {
     const newTask = {
@@ -25,12 +27,25 @@ const ContainerTasks: React.FC<PropsTasks> = ({ tasks }) => {
       description: "Criar um dashboard",
       status: "Em andamento",
     };
-
     const oldTasks = tasksList || [];
     const newTasks = [...oldTasks, newTask];
     setTasksList(newTasks);
-    console.log(tasksList);
+    console.log(newTasks);
+    setShowTasks(true);
+    localStorage.setItem("tasks", JSON.stringify(newTasks));
   };
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasksList));
+    const tasksStorage = localStorage.getItem("tasks") || '[]';
+    if (tasksStorage) {
+      setTasksList(JSON.parse(tasksStorage));
+    }
+    tasksStorage.length < 0 ? setShowTasks(true) : setShowTasks(false);
+    console.log(showTasks);
+    
+
+  }, []);
 
   useEffect(() => {}, [search]);
 
@@ -42,23 +57,24 @@ const ContainerTasks: React.FC<PropsTasks> = ({ tasks }) => {
         onChange={(e) => getSearch(e.target.value)}
       />
       <S.ContainerList>
-        <S.Item>
-          <S.LogoItem />
-          <S.ContainerProgress>
-            {tasksList?.length! > 0
-              ? tasksList?.map((task) => {
-                  return (
-                    <S.Item key={task.id}>
-                      <S.TitleTask>{task?.title}</S.TitleTask>
-                      <S.ProgressItem />
+            {
+              showTasks === true ? ( 
+                tasksList.map((tasks) => (
+                  <S.ContainerList key={tasks.id}>
+                    <S.Item>
+                      <S.TitleTask>{tasks.title}</S.TitleTask>
+                      <S.LogoItem />
+                      <S.ContainerProgress/>
                     </S.Item>
-                  );
-                })
-              : "Nenhuma tarefa encontrada"}
-          </S.ContainerProgress>
-          <S.ProgressText>%</S.ProgressText>
-        </S.Item>
-        <S.ButtonAddItem onClick={() => AddNewTask}>+</S.ButtonAddItem>
+                  </S.ContainerList>
+                  )
+                )
+              ) : (
+                "Nenhuma tarefa encontrada"
+              )
+            }
+            
+        <S.ButtonAddItem onClick={() => AddNewTask()}>+</S.ButtonAddItem>
       </S.ContainerList>
     </S.containerTasks>
   );
