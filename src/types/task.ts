@@ -1,5 +1,5 @@
 export interface TaskTypes {
-    id: string;
+    _id: string;
     title: string;
 }
 

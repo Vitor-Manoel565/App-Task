@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <S.Container>
       <ContainerPerfil name="Vitor" />
-      <ContainerTasks tasks="Dashboard" />
+      <ContainerTasks />
     </S.Container>
   )
 }

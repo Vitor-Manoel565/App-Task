@@ -5,17 +5,18 @@ import { TaskTypes } from "../../types/task";
 import { log } from "console";
 import ContainerModal from "../containerModal";
 import Item from "../containerList";
-interface PropsTasks {
-  tasks: string;
-}
+import getItems from "../../../pages/api/getItems";
+import setItems from "../../../pages/api/setItem";
+import deleteItems from "../../../pages/api/deleteItem";
+import { useStaks } from "../../hooks/useTasks";
 
-const ContainerTasks: React.FC<PropsTasks> = ({ tasks }) => {
+const ContainerTasks: React.FC = () => {
   const id = uuidv4();
   const [search, getSearch] = useState("");
-  const [showTasks, setShowTasks] = useState(false);
   const [tasksList, setTasksList] = useState<TaskTypes[]>([]);
   const [showModal, setShowModal] = useState(false);
-  const [Title, getTitle] = useState<any>("");
+  const [Title, getTitle] = useState<string>("");
+  const { tasks, CreateTask, RemoveTask } = useStaks();
 
   // useEffect(() => {
   //   const tasksStorage = localStorage.getItem("tasks");
@@ -28,38 +29,24 @@ const ContainerTasks: React.FC<PropsTasks> = ({ tasks }) => {
     getTitle(childData);
   };
 
-  const AddNewTask = () => {
-    const newTask = {
-      id: uuidv4(),
-      title: Title,
-    };
-    const oldTasks = tasksList || [];
-    const newTasks = [...oldTasks, newTask];
-    localStorage.setItem("tasks", JSON.stringify(newTasks));
-    setTasksList(newTasks);
-    console.log(newTasks);
-    setShowTasks(true);
+  const AddNewTask = async () => {
+    await CreateTask(Title);
     setShowModal(false);
   };
 
-  const removeTask = (id: string) => {
-    const newTasks = tasksList.filter((task) => task.id !== id);
-    setTasksList(newTasks);
-    localStorage.setItem("tasks", JSON.stringify(newTasks));
+  const HandleRemoveTask = async (id: string) => {
+    await RemoveTask(id);
   };
 
-  useEffect(() => {
-    // localStorage.setItem("tasks", JSON.stringify(tasksList));
-    const tasksStorage = localStorage.getItem("tasks") || "[]";
-    if (tasksStorage) {
-      setTasksList(JSON.parse(tasksStorage));
-    }
-    tasksStorage.length < 0 ? setShowTasks(true) : setShowTasks(false);
-  }, []);
+  // useEffect(() => {
+  //   const tasksStorage = localStorage.getItem("tasks") || "[]";
+  //   setTasksList(JSON.parse(tasksStorage));
+
+  // }, []);
 
   return (
     <S.Container>
-      <S.Title>{tasks}</S.Title>
+      <S.Title>Dashboard</S.Title>
       <S.Search
         placeholder="Search:"
         onChange={(e) => getSearch(e.target.value)}
@@ -73,18 +60,18 @@ const ContainerTasks: React.FC<PropsTasks> = ({ tasks }) => {
         />
       ) : null}
       <S.containerTasks>
-        {showTasks === true ? (
-          tasksList.map((item) => {
-            return (
-              <>
-                <Item key={id} title={item.title} />
-                <figcaption onClick={()=>removeTask(item.id)}>Remove Item</figcaption>
-              </>
-            );
-          })
-        ) : (
-          <>{"Nenhuma tarefa encontrada"}</>
-        )}
+        {tasks?.map((item) => {
+          return (
+            <>
+              <Item key={id} title={item.title} />
+              <figcaption onClick={() => HandleRemoveTask(item._id)}>
+                Remove Item
+              </figcaption>
+            </>
+          );
+        })}
+
+        {!tasks?.length && "Nenha tarefa cadastrada"}
       </S.containerTasks>
       <S.ContainerButton>
         <S.ButtonAddItem onClick={() => setShowModal(!showModal)}>
