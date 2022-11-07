@@ -31,8 +31,8 @@ export const Avatar = styled.div`
 `;
 
 export const ContainerPerformance = styled.div`
-  height: 180px;
-  width: 40%;
+  height: 150px;
+  width: 150px;
   display: flex;
   flex-direction: column;
   align-items: center;
