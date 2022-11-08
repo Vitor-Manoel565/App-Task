@@ -71,7 +71,9 @@ const ContainerTasks: React.FC = () => {
           );
         })}
 
-        {!tasks?.length && "Nenha tarefa cadastrada"}
+        {!tasks?.length && (
+          <S.Title>Nenhuma tarefa encontrada</S.Title>
+        )}
       </S.containerTasks>
       <S.ContainerButton>
         <S.ButtonAddItem onClick={() => setShowModal(!showModal)}>

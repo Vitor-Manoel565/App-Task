@@ -39,7 +39,8 @@ export const Title = styled.h1`
   font-weight: 500;
   color: #727272;
   font-style: normal;
-  font-family: 'Baloo 2', cursive;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
 `;
 
 export const Search = styled.input`
