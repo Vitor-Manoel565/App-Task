@@ -12,6 +12,8 @@ body {
     background-color: #6ADDE6;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2&display=swap');
+
 a {
   color: inherit;
   text-decoration: none;

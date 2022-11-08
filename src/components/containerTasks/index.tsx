@@ -64,9 +64,9 @@ const ContainerTasks: React.FC = () => {
           return (
             <>
               <Item key={id} title={item.title} />
-              <figcaption onClick={() => HandleRemoveTask(item._id)}>
-                Remove Item
-              </figcaption>
+              <S.RemoveItem onClick={() => HandleRemoveTask(item._id)}>
+                Remover tarefa
+              </S.RemoveItem>
             </>
           );
         })}

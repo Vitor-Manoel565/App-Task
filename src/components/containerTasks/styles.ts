@@ -30,7 +30,7 @@ export const containerTasks = styled.div`
   ::-webkit-scrollbar-thumb {
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: #6B6666;
+    background-color: #6b6666;
   }
 `;
 
@@ -38,6 +38,8 @@ export const Title = styled.h1`
   font-size: 1.5rem;
   font-weight: 500;
   color: #727272;
+  font-style: normal;
+  font-family: 'Baloo 2', cursive;
 `;
 
 export const Search = styled.input`
@@ -61,8 +63,6 @@ export const Search = styled.input`
     box-shadow: 0px 0px 16px #2d7c837a;
   }
 `;
-
-
 
 export const ProgressItem = styled.div`
   height: 10px;
@@ -109,6 +109,26 @@ export const ContainerButton = styled.div`
   justify-content: center;
   align-items: center;
   gap: 1rem;
+`;
+
+export const RemoveItem = styled.figcaption`
+  height: auto;
+  width: 100px;
+  padding: 2px;
+  background-color: #bf2e2e;
+  color: white;
+  border: none;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  &:hover {
+    box-shadow: 0px 0px 16px #2d7c837a;
+  }
+  font-size: 0.8rem;
+  /* position: fixed; */
 `;
 
 // -----------styles do modal----------------
