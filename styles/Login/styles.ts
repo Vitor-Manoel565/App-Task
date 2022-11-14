@@ -2,7 +2,7 @@ import styled  from  'styled-components' ;
 
 
 export const ContainerForms = styled.form`
-    height: 50vh;
+    height: auto;
     width: 50vw;
     display: flex;
     flex-direction: column;
