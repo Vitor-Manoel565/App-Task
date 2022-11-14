@@ -5,10 +5,10 @@ import { TaskTypes } from "../../types/task";
 import { log } from "console";
 import ContainerModal from "../containerModal";
 import Item from "../containerList";
-import getItems from "../../../pages/api/getItems";
 import setItems from "../../../pages/api/setItem";
 import deleteItems from "../../../pages/api/deleteItem";
 import { useStaks } from "../../hooks/useTasks";
+import { useAuth } from "../../hooks/useAuth";
 
 const ContainerTasks: React.FC = () => {
   const id = uuidv4();
@@ -17,7 +17,6 @@ const ContainerTasks: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [Title, getTitle] = useState<string>("");
   const { tasks, CreateTask, RemoveTask } = useStaks();
-
   // useEffect(() => {
   //   const tasksStorage = localStorage.getItem("tasks");
   //   if (tasksStorage) {
@@ -30,7 +29,7 @@ const ContainerTasks: React.FC = () => {
   };
 
   const AddNewTask = async () => {
-    await CreateTask(Title);
+   await CreateTask(Title);
     setShowModal(false);
   };
 

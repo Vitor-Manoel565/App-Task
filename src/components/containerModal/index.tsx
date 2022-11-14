@@ -9,7 +9,7 @@ import Item from "../containerList";
 interface PropsModal {
   parentCallback: Function;
   closeModal: Function;
-  confirmEdit: Function;
+  confirmEdit: () => void;
 }
 
 const ContainerModal: React.FC<PropsModal> = ({
@@ -33,18 +33,21 @@ const ContainerModal: React.FC<PropsModal> = ({
           onClick={() => closeModal(false)}
           cursor="pointer"
         />
-        <S.inputTitleText required placeholder="Titulo:" onChange={handleChange} />
+        <S.inputTitleText
+          required
+          placeholder="Titulo:"
+          onChange={handleChange}
+        />
         <Item title={title} />
         <S.ContainerButton>
-            {
-                title.length > 0 ? <AiOutlineCheckSquare
-                fill="#4f944f"
-                size={80}
-                cursor="pointer"
-                onClick={() => confirmEdit()}
-                /> : null
-
-            }
+          {title.length > 0 ? (
+            <AiOutlineCheckSquare
+              fill="#4f944f"
+              size={80}
+              cursor="pointer"
+              onClick={() => confirmEdit()}
+            />
+          ) : null}
         </S.ContainerButton>
       </S.containerModalContent>
     </S.containerModal>

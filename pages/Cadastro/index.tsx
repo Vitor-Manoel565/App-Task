@@ -1,20 +1,21 @@
 import * as S from "../../styles/Cadastro/styles";
 import { useState } from "react";
-import { Register } from "../api/Register";
+// import { Register } from "../../src/services/auth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useAuth } from "../../src/hooks/useAuth";
 
 const Cadastro = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPasword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const { resgiter } = useAuth();
 
   async function handleRegister() {
-    const response = await Register(name,email, password, confirmPassword);
+    const response = await resgiter({name,email, password, confirmPassword});
 
-    if (response.sucess) {
-      console.log("Este é o erro",response.message);
+    if (response.success) {
       return toast.success(`${response.message}`, {
         position: "top-center",
         autoClose: 5000,
