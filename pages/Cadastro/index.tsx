@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAuth } from "../../src/hooks/useAuth";
+import { useRouter } from "next/router";
 
 const Cadastro = () => {
   const [name, setName] = useState<string>("");
@@ -11,6 +12,7 @@ const Cadastro = () => {
   const [password, setPasword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const { resgiter } = useAuth();
+  const router = useRouter();
 
   async function handleRegister() {
     const response = await resgiter({name,email, password, confirmPassword});
@@ -76,6 +78,12 @@ const Cadastro = () => {
       <S.ButtonCadastro type="button" onClick={() => handleRegister()}>
         Cadastrar
       </S.ButtonCadastro>
+      <S.ButtonLogin
+        type="button"
+        onClick={() => router.push("/login")}
+      >
+      Já possui uma conta? Faça login
+      </S.ButtonLogin>
     </S.ContainerForms>
   );
 };

@@ -13,7 +13,7 @@ export const ContainerHeader = styled.div`
 
 export const ContainerAvatar = styled.div`
   height: auto;
-  width: 30%;
+  width: auto;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -47,6 +47,7 @@ export const Name = styled.h1`
   font-size: 1.5rem;
   font-weight: 500;
   color: #727272;
+  width: auto;
 `;
 
 export const TextPerformance = styled.h1`
@@ -54,3 +55,22 @@ export const TextPerformance = styled.h1`
   font-weight: 500;
   color: #727272;
 `;
+
+export const ContainerLogout = styled.div`
+  height: auto;
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  color: #9c9393;
+`;
+
+export const Logout = styled.h1`
+  font-size: 1rem;
+  font-weight: 500;
+  color: #727272;
+  cursor: pointer;
+`;
+

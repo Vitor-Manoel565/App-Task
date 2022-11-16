@@ -9,6 +9,8 @@ import setItems from "../../../pages/api/setItem";
 import deleteItems from "../../../pages/api/deleteItem";
 import { useStaks } from "../../hooks/useTasks";
 import { useAuth } from "../../hooks/useAuth";
+import { taskAtom } from "../../hooks/states";
+
 
 const ContainerTasks: React.FC = () => {
   const [search, getSearch] = useState("");
@@ -16,6 +18,10 @@ const ContainerTasks: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [Title, getTitle] = useState<string>("");
   const { tasks, CreateTask, RemoveTask } = useStaks();
+  const [taskTitle, setTaskTitle] = useState(taskAtom);
+  
+
+
   // useEffect(() => {
   //   const tasksStorage = localStorage.getItem("tasks");
   //   if (tasksStorage) {
@@ -25,6 +31,7 @@ const ContainerTasks: React.FC = () => {
 
   const parentCallback = (childData: string) => {
     getTitle(childData);
+    // setTaskTitle(Title);
   };
 
   const AddNewTask = async () => {

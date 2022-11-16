@@ -2,6 +2,7 @@ import * as S from "./styles";
 import { useState } from "react";
 import {useRouter} from "next/router";
 
+
 interface PropsCard {
   title: string;
   id: string;

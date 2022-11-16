@@ -7,3 +7,4 @@ export const tokenAtom = atom<string | null>(null);
 export const userAtom = atom<string | null>(null);
 export const id = atom<string | null>(null);
 export const userDataAtom = atom<userDataTypes | null>(null);
+export const taskAtom = atom<string | null>(null);

@@ -51,3 +51,22 @@ export const ButtonCadastro = styled.button`
         scale: 1.1;
     }
 `;
+
+
+export const ButtonLogin = styled.button`
+    height: 50px;
+    width: 80%;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: white;
+    background-color: #66dfd3;
+    cursor: pointer;
+    :hover {
+        box-shadow: 0 0 10px #727272;
+        cursor: pointer;
+        scale: 1.1;
+    }
+`;

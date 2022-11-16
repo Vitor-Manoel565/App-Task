@@ -1,10 +1,12 @@
 import { useAtom } from "jotai";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { tokenAtom } from "./states";
 import { userAtom } from "./states";
 import { BackendApi } from "./Api";
+import {useRouter} from "next/router";
 
 export const useAuth = () => {
+  const router = useRouter();
   const [token, setToken] = useAtom(tokenAtom);
   const [User, setUser] = useAtom(userAtom);
   // const [id, setId] = useAtom(userAtom);
@@ -28,7 +30,7 @@ export const useAuth = () => {
 
       window.localStorage.setItem("tasks@token", response.data.token);
 
-      return true;
+      return true
     } catch (error) {
       console.log(null);
       return false;
@@ -67,6 +69,7 @@ export const useAuth = () => {
     }
   };
 
+
   // useEffect(() => {
   // const fetchUser = async () => {
   //   try {
@@ -89,6 +92,7 @@ export const useAuth = () => {
   const singOut = () => {
     setToken(null);
     localStorage.removeItem("tasks@token");
+    router.push("/Login");
   };
 
   return { token, singIn, singOut, setToken, resgiter, User };
