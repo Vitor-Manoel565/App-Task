@@ -4,14 +4,14 @@ import { useStaks } from "../src/hooks/useTasks";
 import { useEffect } from "react";
 import { useAuth } from "../src/hooks/useAuth";
 import { useRouter } from "next/router";
+import { useUserData } from "../src/hooks/useUserData";
 
 export default function App({ Component, pageProps }: AppProps) {
   const { fetchTasks } = useStaks();
   const { token, setToken } = useAuth();
+  const { fetchUserData } = useUserData();
   const router = useRouter();
   const pathName = router.pathname;
-
-  
 
   const publicRoutes = ["/Login", "/Cadastro"];
 
@@ -23,15 +23,13 @@ export default function App({ Component, pageProps }: AppProps) {
       return;
     }
     setToken(_token);
-    
-
   }, []);
-
 
   useEffect(() => {
     if (!token) return;
     console.log("Token encontrado", token);
     fetchTasks();
+    fetchUserData();
   }, [token]);
 
   return <Component {...pageProps} />;

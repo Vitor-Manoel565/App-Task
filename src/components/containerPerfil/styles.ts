@@ -23,8 +23,8 @@ export const ContainerAvatar = styled.div`
 `;
 
 export const Avatar = styled.div`
-  height: 150px;
-  width: 150px;
+  height: 100px;
+  width: 100px;
   border-radius: 50%;
   margin-top: 50px;
   background-color: gray;

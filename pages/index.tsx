@@ -1,18 +1,15 @@
-import * as S from '../styles/Home/index';
-import ContainerPerfil from '../src/components/containerPerfil';
-import ContainerTasks from '../src/components/containerTasks';
-import { useAuth } from '../src/hooks/useAuth';
-
+import * as S from "../styles/Home/index";
+import ContainerPerfil from "../src/components/containerPerfil";
+import ContainerTasks from "../src/components/containerTasks";
+import { useUserData } from "../src/hooks/useUserData";
 
 export default function Home() {
-  const {User} = useAuth();
-  console.log(User);
-  
-  
+  const { userData } = useUserData();
+
   return (
     <S.Container>
-      <ContainerPerfil name={User} />
+      <ContainerPerfil name={userData?.name} />
       <ContainerTasks />
     </S.Container>
-  )
+  );
 }

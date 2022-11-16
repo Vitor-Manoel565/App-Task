@@ -8,7 +8,7 @@ body {
     width: 100%;
     justify-content: center;
     align-items: center;
-    background-color: #6ADDE6;
+    background-color: rgb(121, 121, 121);
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');

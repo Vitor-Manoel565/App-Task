@@ -6,6 +6,7 @@ export const ContainerList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  cursor: pointer;
 `;
 
 export const Item = styled.div`

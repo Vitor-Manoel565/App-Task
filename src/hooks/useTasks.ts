@@ -3,6 +3,7 @@ import { useCallback } from "react";
 import { tasksAtom } from "./states";
 import axios from "axios";
 import { useAuth } from "./useAuth";
+import { BackendApi } from "./Api";
 
 export const useStaks = () => {
   const [tasks, setTasks] = useAtom(tasksAtom);
@@ -12,7 +13,7 @@ export const useStaks = () => {
   const fetchTasks = useCallback(async () => {
     if (!token) return console.log("No token");
     try {
-      const { data } = await axios.get("http://localhost:4000/tasks", {
+      const { data } = await BackendApi.get("/tasks", {
         headers: {
           Authorization: token,
         },
@@ -27,8 +28,8 @@ export const useStaks = () => {
   const CreateTask = useCallback(
     async (title: string) => {
       try {
-        await axios.post(
-          "http://localhost:4000/tasks",
+        await BackendApi.post(
+          "/tasks",
           {
             title: title,
           },
@@ -50,7 +51,7 @@ export const useStaks = () => {
   const RemoveTask = useCallback(
     async (id: string) => {
       try {
-        await axios.delete(`http://localhost:4000/tasks/${id}`, {
+        await BackendApi.delete(`/tasks/${id}`, {
           headers: {
             Authorization: token,
           },

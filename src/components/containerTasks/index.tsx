@@ -11,7 +11,6 @@ import { useStaks } from "../../hooks/useTasks";
 import { useAuth } from "../../hooks/useAuth";
 
 const ContainerTasks: React.FC = () => {
-  const id = uuidv4();
   const [search, getSearch] = useState("");
   const [tasksList, setTasksList] = useState<TaskTypes[]>([]);
   const [showModal, setShowModal] = useState(false);
@@ -29,7 +28,7 @@ const ContainerTasks: React.FC = () => {
   };
 
   const AddNewTask = async () => {
-   await CreateTask(Title);
+    await CreateTask(Title);
     setShowModal(false);
   };
 
@@ -62,7 +61,7 @@ const ContainerTasks: React.FC = () => {
         {tasks?.map((item) => {
           return (
             <>
-              <Item key={id} title={item.title} />
+              <Item key={item._id} title={item.title} id={item._id} />
               <S.RemoveItem onClick={() => HandleRemoveTask(item._id)}>
                 Remover tarefa
               </S.RemoveItem>
@@ -70,9 +69,7 @@ const ContainerTasks: React.FC = () => {
           );
         })}
 
-        {!tasks?.length && (
-          <S.Title>Nenhuma tarefa encontrada</S.Title>
-        )}
+        {!tasks?.length && <S.Title>Nenhuma tarefa encontrada</S.Title>}
       </S.containerTasks>
       <S.ContainerButton>
         <S.ButtonAddItem onClick={() => setShowModal(!showModal)}>

@@ -1,14 +1,13 @@
-import axios from "axios";
 import { useAtom } from "jotai";
 import { useEffect } from "react";
 import { tokenAtom } from "./states";
 import { userAtom } from "./states";
-
+import { BackendApi } from "./Api";
 
 export const useAuth = () => {
   const [token, setToken] = useAtom(tokenAtom);
   const [User, setUser] = useAtom(userAtom);
-  const [id, setId] = useAtom(userAtom);
+  // const [id, setId] = useAtom(userAtom);
 
   const singIn = async ({
     email,
@@ -18,17 +17,16 @@ export const useAuth = () => {
     password: string;
   }) => {
     try {
-      const response = await axios.post("http://localhost:4000/auth/login", {
+      const response = await BackendApi.post("/auth/login", {
         email,
         password,
       });
 
       setToken(response.data.token);
-      setId(response.data.id);
+      setUser(response.data.existingUser);
+      console.log(User);
 
-      
       window.localStorage.setItem("tasks@token", response.data.token);
-
 
       return true;
     } catch (error) {
@@ -36,7 +34,6 @@ export const useAuth = () => {
       return false;
     }
   };
-  
 
   const resgiter = async ({
     email,
@@ -50,7 +47,7 @@ export const useAuth = () => {
     name: string;
   }) => {
     try {
-      const response = await axios.post("http://localhost:4000/auth/register", {
+      const response = await BackendApi.post("/auth/register", {
         email,
         password,
         confirmPassword,
@@ -70,25 +67,24 @@ export const useAuth = () => {
     }
   };
 
-  useEffect(() => {
-  const fetchUser = async () => {
-    try {
-      const response = await axios.get(`http://localhost:4000/user/${id}`, {
-        headers: {
-          Authorization: token,
-        },
-      });
+  // useEffect(() => {
+  // const fetchUser = async () => {
+  //   try {
+  //     const response = await axios.get(`http://localhost:4000/user/${id}`, {
+  //       headers: {
+  //         Authorization: token,
+  //       },
+  //     });
 
-      setUser(response.data);
-      console.log(User);
-      
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  fetchUser();  
-  }, [token,id]);
-    
+  //     setUser(response.data);
+  //     console.log(User);
+
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  // fetchUser();
+  // }, [token,id]);
 
   const singOut = () => {
     setToken(null);
