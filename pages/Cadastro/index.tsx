@@ -13,7 +13,7 @@ const Cadastro = () => {
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const { resgiter } = useAuth();
   const router = useRouter();
-
+  // const [showPassword, setShowPassword] = useState(false);
   async function handleRegister() {
     const response = await resgiter({name,email, password, confirmPassword});
 
@@ -65,6 +65,9 @@ const Cadastro = () => {
         placeholder="Email"
         onChange={(e) => setEmail(e.target.value)}
       />
+      {/* {
+        !showPassword  
+      } */}
       <S.Input
         type="password"
         placeholder="Senha"
@@ -80,7 +83,7 @@ const Cadastro = () => {
       </S.ButtonCadastro>
       <S.ButtonLogin
         type="button"
-        onClick={() => router.push("/login")}
+        onClick={() => router.push("/Login")}
       >
       Já possui uma conta? Faça login
       </S.ButtonLogin>

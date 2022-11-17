@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { IoEyeSharp, IoEyeOffSharp } from "react-icons/io5";
 import { FaEyeSlash } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   //   const { login } = useAuth();
@@ -33,10 +34,8 @@ const Login = () => {
       password,
     });
 
-    console.log("Login response", loginResponse);
-
-    if (loginResponse) {
-      toast.success("Login realizado com sucesso!", {
+    if (loginResponse.success) {
+      toast.success(`${loginResponse.message}`, {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -47,7 +46,7 @@ const Login = () => {
       });
       router.push("/");
     } else {
-      toast.error(`erro verifique seu login!`, {
+      return toast.error(`${loginResponse.message}!`, {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -56,7 +55,6 @@ const Login = () => {
         draggable: true,
         progress: undefined,
       });
-      console.log("Erro ao realizar login");
     }
   }
 
@@ -73,42 +71,42 @@ const Login = () => {
         draggable
         pauseOnHover
       />
-    <S.ContainerForms onSubmit={handleSubmit}>
-      <S.ContainerTitle>Entrar</S.ContainerTitle>
-      <S.ContainerInput>
-        <S.Input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-        />
-      </S.ContainerInput>
-      <S.ContainerInput>
-        <S.Input
-          type={showPassword ? "text" : "password"}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Senha"
-        />
-        <S.showPassword>
-          {!showPassword  ? (
-            <FaEyeSlash
-              size={25}
-              onClick={() => setShowPassword(!showPassword)}
-            />
-          ) : (
-            <IoEyeSharp
-              size={25}
-              onClick={() => setShowPassword(!showPassword)}
-            />
-          )}
-        </S.showPassword>
-      </S.ContainerInput>
-      <S.ButtonSingin type="submit" onClick={() => handleLogin()}>
-        Entrar
-      </S.ButtonSingin>
-      {error && <p>{error}</p>}
-    </S.ContainerForms>
+      <S.ContainerForms onSubmit={handleSubmit}>
+        <S.ContainerTitle>Entrar</S.ContainerTitle>
+        <S.ContainerInput>
+          <S.Input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+          />
+        </S.ContainerInput>
+        <S.ContainerInput>
+          <S.Input
+            type={showPassword ? "text" : "password"}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Senha"
+          />
+          <S.showPassword>
+            {!showPassword ? (
+              <FaEyeSlash
+                size={25}
+                onClick={() => setShowPassword(!showPassword)}
+              />
+            ) : (
+              <IoEyeSharp
+                size={25}
+                onClick={() => setShowPassword(!showPassword)}
+              />
+            )}
+          </S.showPassword>
+        </S.ContainerInput>
+        <S.ButtonSingin type="submit" onClick={() => handleLogin()}>
+          Entrar
+        </S.ButtonSingin>
+        {error && <p>{error}</p>}
+      </S.ContainerForms>
     </>
   );
 };

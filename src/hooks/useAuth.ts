@@ -9,7 +9,7 @@ export const useAuth = () => {
   const router = useRouter();
   const [token, setToken] = useAtom(tokenAtom);
   const [User, setUser] = useAtom(userAtom);
-  // const [id, setId] = useAtom(userAtom);
+
 
   const singIn = async ({
     email,
@@ -26,14 +26,19 @@ export const useAuth = () => {
 
       setToken(response.data.token);
       setUser(response.data.existingUser);
-      console.log(User);
+
 
       window.localStorage.setItem("tasks@token", response.data.token);
 
-      return true
+      return {
+        success: true,
+        message: "Login realizado com sucesso!",
+      }
     } catch (error) {
-      console.log(null);
-      return false;
+      return {
+        message: error.response?.data?.message,
+        success: false
+      }
     }
   };
 
