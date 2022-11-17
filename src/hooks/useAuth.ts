@@ -22,12 +22,10 @@ export const useAuth = () => {
         email,
         password,
       });
-
+      console.log("id aqui:",id);
+      window.localStorage.setItem("tasks@token", response.data.token);
       setToken(response.data.token);
       setId(response.data.id);
-
-      
-      window.localStorage.setItem("tasks@token", response.data.token);
 
 
       return true;
@@ -70,30 +68,11 @@ export const useAuth = () => {
     }
   };
 
-  useEffect(() => {
-  const fetchUser = async () => {
-    try {
-      const response = await axios.get(`http://localhost:4000/user/${id}`, {
-        headers: {
-          Authorization: token,
-        },
-      });
-
-      setUser(response.data);
-      console.log(User);
-      
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  fetchUser();  
-  }, [token,id]);
-    
 
   const singOut = () => {
     setToken(null);
     localStorage.removeItem("tasks@token");
   };
 
-  return { token, singIn, singOut, setToken, resgiter, User };
+  return { token, singIn, singOut, setToken, resgiter,User };
 };

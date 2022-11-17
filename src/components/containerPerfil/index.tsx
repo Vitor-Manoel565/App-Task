@@ -1,7 +1,7 @@
 import * as S from "./styles";
 
 interface PropsUser {
-  name: string | null;
+  name: string;
 }
 
 const ContainerPerfil: React.FC<PropsUser> = ({ name }) => {
