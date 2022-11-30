@@ -13,7 +13,7 @@ const Item: React.FC<PropsCard> = ({ title, id }) => {
   const router = useRouter();
 
   return (
-    <S.ContainerList onClick={()=> router.push(`/tasks/${id}`)}>
+    <S.ContainerList onClick={()=> router.push(`/tasks/${title}`)}>
       <S.Item>
         <S.LogoItem />
         <S.ProgressItem>

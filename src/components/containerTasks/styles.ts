@@ -14,7 +14,7 @@ export const containerTasks = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
   padding: 2rem;
   overflow-y: scroll;
   ::-webkit-scrollbar-track {
@@ -30,7 +30,7 @@ export const containerTasks = styled.div`
   ::-webkit-scrollbar-thumb {
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: #6b6666;
+    background-color: #bf2e2e;
   }
 `;
 
@@ -132,56 +132,3 @@ export const RemoveItem = styled.figcaption`
   /* position: fixed; */
 `;
 
-// -----------styles do modal----------------
-
-// export const containerModal = styled.div`
-//   height: 100vh;
-//   width: 100vw;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   position: fixed;
-//   top: 0;
-//   left: 0;
-//   background-color: rgba(0, 0, 0, 0.5);
-//   z-index: 999;
-// `;
-
-// export const containerModalContent = styled.div`
-//   height: 80%;
-//   width: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   background-color: aliceblue;
-//   margin-left: 40vw;
-//   padding: 20px;
-//   gap: 0.7rem;
-//   box-shadow:  0 0 15px 0 rgba(0, 0, 0, 0.7);
-//   /* gap: 0.5rem; */
-// `;
-
-// export const inputTitleText = styled.input`
-//   height: 50px;
-//   width: 100%;
-//   border: none;
-//   outline: none;
-//   font-size: 1.5rem;
-//   font-weight: 500;
-//   color: #727272;
-//   padding: 1rem;
-//   border-radius: 10px;
-//   :hover {
-//     background-color: #f2f2f2;
-//     box-shadow: 0 0 10px #727272;
-//     cursor: pointer;
-//   }
-// `;
-
-// export const Result = styled.div`
-//   height: 100%;
-//   width: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   gap: 0.5rem;
-//   padding: 1rem;
-// `;
